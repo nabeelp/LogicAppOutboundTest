@@ -1,0 +1,14 @@
+{
+  "APIMDomain": {
+    "type": "String",
+    "value": "@appsetting('APIMDomain')"
+  },
+  "APIMSubscriptionKey": {
+    "type": "String",
+    "value": "@appsetting('APIMSubscriptionKey')"
+  },
+  "LogicAppName": {
+    "type": "String",
+    "value": "@appsetting('LogicAppName')"
+  }
+}

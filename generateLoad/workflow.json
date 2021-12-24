@@ -1,0 +1,83 @@
+{
+  "definition": {
+    "$schema": "https://schema.management.azure.com/providers/Microsoft.Logic/schemas/2016-06-01/workflowdefinition.json#",
+    "actions": {
+      "For_each_item_in_myArray": {
+        "actions": {
+          "Call_Echo_API_in_APIM": {
+            "inputs": {
+              "headers": {
+                "Ocp-Apim-Subscription-Key": "@parameters('APIMSubscriptionKey')"
+              },
+              "method": "GET",
+              "queries": {
+                "param1": "@parameters('LogicAppName')",
+                "param2": "@{items('For_each_item_in_myArray')}"
+              },
+              "retryPolicy": {
+                "type": "none"
+              },
+              "uri": "http://@{parameters('APIMDomain')}/echo/resource"
+            },
+            "runAfter": {},
+            "type": "Http"
+          }
+        },
+        "foreach": "@variables('myArray')",
+        "runAfter": {
+          "Initialize_myArray": [
+            "Succeeded"
+          ]
+        },
+        "type": "Foreach"
+      },
+      "Initialize_myArray": {
+        "inputs": {
+          "variables": [
+            {
+              "name": "myArray",
+              "type": "array",
+              "value": [
+                1,
+                2,
+                3,
+                4,
+                5,
+                6,
+                7,
+                8,
+                9,
+                10,
+                11,
+                12,
+                13,
+                14,
+                15,
+                16,
+                17,
+                18,
+                19,
+                20
+              ]
+            }
+          ]
+        },
+        "runAfter": {},
+        "type": "InitializeVariable"
+      }
+    },
+    "contentVersion": "1.0.0.0",
+    "outputs": {},
+    "triggers": {
+      "Recurrence": {
+        "recurrence": {
+          "frequency": "Hour",
+          "interval": 1,
+          "startTime": "2021-12-24T09:00:00Z"
+        },
+        "type": "Recurrence"
+      }
+    }
+  },
+  "kind": "Stateful"
+}
